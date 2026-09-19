@@ -98,16 +98,11 @@ export default async function Home() {
                   </button>
                 </div>
               </div>
-              <div className="mt-6 grid grid-cols-2 gap-3">
+              <div className="mt-6 grid grid-cols-1 gap-3">
                 <div className="border border-border p-4">
                   <p className="text-xs text-muted-foreground">Total clicks</p>
                   <p className="mt-1 text-2xl font-semibold">1,284</p>
                   <p className="mt-1 text-xs text-emerald-600 dark:text-emerald-400">+18.4% this week</p>
-                </div>
-                <div className="border border-border p-4">
-                  <p className="text-xs text-muted-foreground">Top source</p>
-                  <p className="mt-1 text-2xl font-semibold">Email</p>
-                  <p className="mt-1 text-xs text-muted-foreground">42% of clicks</p>
                 </div>
               </div>
               <div className="mt-5 flex items-end gap-2 border-t border-border pt-5" aria-hidden="true">
