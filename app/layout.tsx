@@ -34,12 +34,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <header className="flex items-center justify-end gap-4 border-b border-black/[.08] px-6 py-4 dark:border-white/[.145]">
             <Show when="signed-out">
               <SignInButton mode="modal">
-                <Button variant="outline" size="sm">
+s                <Button variant="outline" size="lg">
                   Sign in
                 </Button>
               </SignInButton>
               <SignUpButton mode="modal">
-                <Button size="sm">Sign up</Button>
+                <Button size="lg">Sign up</Button>
               </SignUpButton>
             </Show>
             <Show when="signed-in">

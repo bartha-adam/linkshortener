@@ -6,7 +6,6 @@ import {
   Check,
   Copy,
   Link2,
-  LockKeyhole,
   MousePointerClick,
   QrCode,
   Sparkles,
@@ -29,11 +28,6 @@ const features = [
     icon: QrCode,
     title: "Instant QR codes",
     description: "Give every link a scannable companion for print, events, and packaging.",
-  },
-  {
-    icon: LockKeyhole,
-    title: "Links on your terms",
-    description: "Control destinations and keep your link collection private and organized.",
   },
 ];
 
@@ -132,7 +126,7 @@ export default async function Home() {
           <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">Every link, ready for its next job.</h2>
           <p className="text-lg leading-8 text-muted-foreground">The essentials for sharing, measuring, and managing the URLs that matter to your work.</p>
         </div>
-        <div className="mt-12 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
           {features.map((feature) => {
             const Icon = feature.icon;
             return (
