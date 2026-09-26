@@ -3,7 +3,7 @@
 import { z } from "zod";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
-import { createLinkForUser } from "@/data/links";
+import { createLinkForUser, deleteLinkForUser, updateLinkForUser } from "@/data/links";
 
 const createLinkSchema = z.object({
   url: z.string().url(),
@@ -37,5 +37,56 @@ export async function createLink(
     return { success: true, data };
   } catch {
     return { success: false, error: "That short code is already taken." };
+  }
+}
+
+const updateLinkSchema = z.object({
+  linkId: z.number(),
+  url: z.string().url(),
+});
+
+type UpdateLinkInput = z.infer<typeof updateLinkSchema>;
+
+export async function updateLink(
+  input: UpdateLinkInput
+): Promise<ActionResult<Awaited<ReturnType<typeof updateLinkForUser>>>> {
+  const { userId } = await auth();
+  if (!userId) return { success: false, error: "Unauthorized" };
+
+  const parsed = updateLinkSchema.safeParse(input);
+  if (!parsed.success) return { success: false, error: parsed.error.message };
+
+  try {
+    const data = await updateLinkForUser(userId, parsed.data.linkId, { url: parsed.data.url });
+    if (!data) return { success: false, error: "Link not found." };
+    revalidatePath("/dashboard");
+    return { success: true, data };
+  } catch {
+    return { success: false, error: "Failed to update the link." };
+  }
+}
+
+const deleteLinkSchema = z.object({
+  linkId: z.number(),
+});
+
+type DeleteLinkInput = z.infer<typeof deleteLinkSchema>;
+
+export async function deleteLink(
+  input: DeleteLinkInput
+): Promise<ActionResult<Awaited<ReturnType<typeof deleteLinkForUser>>>> {
+  const { userId } = await auth();
+  if (!userId) return { success: false, error: "Unauthorized" };
+
+  const parsed = deleteLinkSchema.safeParse(input);
+  if (!parsed.success) return { success: false, error: parsed.error.message };
+
+  try {
+    const data = await deleteLinkForUser(userId, parsed.data.linkId);
+    if (!data) return { success: false, error: "Link not found." };
+    revalidatePath("/dashboard");
+    return { success: true, data };
+  } catch {
+    return { success: false, error: "Failed to delete the link." };
   }
 }

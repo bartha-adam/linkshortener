@@ -1,4 +1,4 @@
-import { desc, eq } from "drizzle-orm";
+import { and, desc, eq } from "drizzle-orm";
 import db from "@/db";
 import { links } from "@/db/schema";
 
@@ -40,4 +40,25 @@ export async function createLinkForUser(
     }
   }
   throw new Error("Failed to generate a unique short code");
+}
+
+export async function updateLinkForUser(
+  userId: string,
+  linkId: number,
+  input: { url: string }
+) {
+  const [updated] = await db
+    .update(links)
+    .set({ url: input.url })
+    .where(and(eq(links.id, linkId), eq(links.userId, userId)))
+    .returning();
+  return updated;
+}
+
+export async function deleteLinkForUser(userId: string, linkId: number) {
+  const [deleted] = await db
+    .delete(links)
+    .where(and(eq(links.id, linkId), eq(links.userId, userId)))
+    .returning();
+  return deleted;
 }

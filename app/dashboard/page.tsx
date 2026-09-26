@@ -2,6 +2,8 @@ import { auth } from "@clerk/nextjs/server";
 import { Link2, MousePointerClick } from "lucide-react";
 import { getLinksForUser } from "@/data/links";
 import { CreateLinkDialog } from "./create-link-dialog";
+import { EditLinkDialog } from "./edit-link-dialog";
+import { DeleteLinkDialog } from "./delete-link-dialog";
 
 export default async function DashboardPage() {
   const { userId } = await auth();
@@ -36,9 +38,11 @@ export default async function DashboardPage() {
                       {link.url}
                     </a>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground sm:justify-self-end">
+                  <div className="flex items-center gap-3 text-sm text-muted-foreground sm:justify-self-end">
                     <MousePointerClick className="size-4" />
                     <span>{link.clicks.toLocaleString()} clicks</span>
+                    <EditLinkDialog link={link} />
+                    <DeleteLinkDialog link={link} />
                   </div>
                 </li>
               ))}
