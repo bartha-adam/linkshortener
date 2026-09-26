@@ -1,3 +1,7 @@
+---
+description: read this before creating or modifying UI components in the app
+---
+
 # UI Components (shadcn/ui)
 
 All UI in this app is built from shadcn/ui components. Never hand-roll a custom component (button, input, dialog, dropdown, card, etc.) when a shadcn/ui equivalent exists.

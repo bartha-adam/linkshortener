@@ -12,14 +12,6 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 This is a Next.js 16 (App Router) link shortener using Clerk for auth, Drizzle ORM over Neon serverless Postgres, and Tailwind CSS v4 + shadcn/base-ui for UI.
 
-Detailed, topic-specific coding standards live in [`docs/`](./docs/). **Read the relevant doc before working in that area** — this file only holds the rules that apply everywhere.
-
-> [!IMPORTANT]
-> It is **critical** that you ALWAYS read the relevant individual instructions file(s) in `/docs` **before generating any code**, not just before starting a task. This applies every time you touch a related area, even mid-task. Never rely on memory of a doc's contents from earlier in the conversation — re-read it if there's any doubt.
-
-- Auth: [`docs/authentication.md`](./docs/authentication.md) — read before touching sign-in/sign-up flows, middleware/`proxy.ts` auth checks, session or user data access, Clerk components/hooks, or any protected route/API logic.
-- UI components: [`docs/UI.md`](./docs/UI.md) — read before adding or editing any component in `components/`, any page markup/styling, or anything using Tailwind, shadcn, or base-ui.
-
 ## Always-on rules
 
 - **Next.js 16 breaking changes are real.** Never assume a Next.js API/file convention from training data is still correct — verify against `node_modules/next/dist/docs/` first (e.g. `middleware.ts` no longer exists; it's `proxy.ts`).

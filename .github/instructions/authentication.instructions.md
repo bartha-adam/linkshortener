@@ -1,3 +1,6 @@
+---
+description: read this before implementing or modifying authentication in the app
+---
 # Auth (Clerk)
 
 Clerk (`@clerk/nextjs`) is the **only** auth mechanism in this app. Never add NextAuth, custom session/cookie/JWT handling, or any other auth provider.
