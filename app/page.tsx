@@ -5,6 +5,7 @@ import {
   BarChart3,
   Check,
   Copy,
+  CreditCard,
   Link2,
   MousePointerClick,
   QrCode,
@@ -71,7 +72,14 @@ export default async function Home() {
               </SignInButton>
             </div>
             <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
-              <span className="inline-flex items-center gap-2"><Check className="size-4 text-emerald-500" /> No credit card</span>
+              <span className="inline-flex items-center gap-2">
+                <span className="relative flex size-4 items-center justify-center">
+                  <CreditCard className="size-4 text-emerald-500" />
+                  <span className="absolute inset-x-[1px] h-px rotate-45 bg-red-500" />
+                  <span className="absolute inset-x-[1px] h-px -rotate-45 bg-red-500" />
+                </span>
+                No credit card
+              </span>
               <span className="inline-flex items-center gap-2"><Check className="size-4 text-emerald-500" /> Ready in seconds</span>
             </div>
           </div>
