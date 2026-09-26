@@ -1,4 +1,4 @@
-import { and, desc, eq } from "drizzle-orm";
+import { and, desc, eq, sql } from "drizzle-orm";
 import db from "@/db";
 import { links } from "@/db/schema";
 
@@ -53,6 +53,18 @@ export async function updateLinkForUser(
     .where(and(eq(links.id, linkId), eq(links.userId, userId)))
     .returning();
   return updated;
+}
+
+export async function getLinkByShortCode(shortCode: string) {
+  const [link] = await db.select().from(links).where(eq(links.shortCode, shortCode));
+  return link;
+}
+
+export async function incrementLinkClicks(linkId: number) {
+  await db
+    .update(links)
+    .set({ clicks: sql`${links.clicks} + 1` })
+    .where(eq(links.id, linkId));
 }
 
 export async function deleteLinkForUser(userId: string, linkId: number) {
