@@ -11,7 +11,9 @@ const createLinkSchema = z.object({
     .string()
     .min(3)
     .max(30)
-    .regex(/^[a-zA-Z0-9-]+$/, "Only letters, numbers, and hyphens are allowed"),
+    .regex(/^[a-zA-Z0-9-]+$/, "Only letters, numbers, and hyphens are allowed")
+    .optional()
+    .or(z.literal("")),
 });
 
 type CreateLinkInput = z.infer<typeof createLinkSchema>;
@@ -27,7 +29,10 @@ export async function createLink(
   if (!parsed.success) return { success: false, error: parsed.error.message };
 
   try {
-    const data = await createLinkForUser(userId, parsed.data);
+    const data = await createLinkForUser(userId, {
+      url: parsed.data.url,
+      shortCode: parsed.data.shortCode || undefined,
+    });
     revalidatePath("/dashboard");
     return { success: true, data };
   } catch {

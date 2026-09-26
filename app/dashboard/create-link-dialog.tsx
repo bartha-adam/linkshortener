@@ -52,11 +52,9 @@ export function CreateLinkDialog() {
         if (!next) setError(null);
       }}
     >
-      <DialogTrigger asChild>
-        <Button>
-          <Plus className="size-4" />
-          New link
-        </Button>
+      <DialogTrigger render={<Button />}>
+        <Plus className="size-4" />
+        New link
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -76,13 +74,12 @@ export function CreateLinkDialog() {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="shortCode">Short code</Label>
+            <Label htmlFor="shortCode">Short code (optional)</Label>
             <Input
               id="shortCode"
-              placeholder="my-link"
+              placeholder="Leave blank to auto-generate"
               value={shortCode}
               onChange={(e) => setShortCode(e.target.value)}
-              required
             />
           </div>
           {error && <p className="text-sm text-destructive">{error}</p>}
