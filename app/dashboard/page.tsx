@@ -1,6 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { Link2, MousePointerClick } from "lucide-react";
 import { getLinksForUser } from "@/data/links";
+import { CreateLinkDialog } from "./create-link-dialog";
 
 export default async function DashboardPage() {
   const { userId } = await auth();
@@ -9,10 +10,13 @@ export default async function DashboardPage() {
   return (
     <main className="flex-1 bg-background">
       <div className="mx-auto max-w-5xl px-6 py-12 sm:py-16">
-        <header className="border-b border-border pb-8">
-          <p className="text-sm font-semibold tracking-[0.18em] text-emerald-600 uppercase dark:text-emerald-400">Linkline</p>
-          <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Your links</h1>
-          <p className="mt-3 text-muted-foreground">Manage the links you have shared and track their activity.</p>
+        <header className="flex flex-wrap items-end justify-between gap-4 border-b border-border pb-8">
+          <div>
+            <p className="text-sm font-semibold tracking-[0.18em] text-emerald-600 uppercase dark:text-emerald-400">Linkline</p>
+            <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Your links</h1>
+            <p className="mt-3 text-muted-foreground">Manage the links you have shared and track their activity.</p>
+          </div>
+          <CreateLinkDialog />
         </header>
 
         {userLinks.length === 0 ? (
